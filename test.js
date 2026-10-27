@@ -20,18 +20,18 @@ test('classic joker maximum for every category, independent of dice face', () =>
   let next=K.record(s,id); assert.equal(next.players[0].scores[id],maximum); assert.equal(next.players[0].kniffelBonus,50);
  }
 });
-test('first Kniffel anywhere and strikes count; repeated previews do not award bonus',()=>{
+test('first Kniffel anywhere counts; repeated previews do not award bonus',()=>{
  let s=K.create(['A']); s=K.roll(s,()=>0); assert.equal(K.preview(s,'sixes'),0);
- s=K.record(s,'chance',true); assert.equal(s.players[0].kniffelCount,1); assert.equal(s.players[0].kniffelBonus,0);
+ s=K.record(s,'sixes'); assert.equal(s.players[0].scores.sixes,0); assert.equal(s.players[0].kniffelCount,1); assert.equal(s.players[0].kniffelBonus,0);
  s=K.roll(s,()=>0); K.preview(s,'full'); K.preview(s,'full'); assert.equal(s.players[0].kniffelBonus,0);
- s=K.record(s,'full',true); assert.equal(s.players[0].scores.full,0); assert.equal(s.players[0].kniffelBonus,50);
+ s=K.record(s,'full'); assert.equal(s.players[0].scores.full,25); assert.equal(s.players[0].kniffelBonus,50);
  s=K.record(K.roll(s,()=>0),'small'); assert.equal(s.players[0].kniffelCount,3); assert.equal(s.players[0].kniffelBonus,100);
 });
-test('championship scores actual combinations and permits strikes',()=>{
+test('championship scores actual combinations, including zero',()=>{
  let s=K.create(['A'],'championship'); assert.equal(s.rules,'championship');
  s=K.record(K.roll(s,()=>0),'kniffel'); s=K.roll(s,()=>0);
  assert.equal(K.preview(s,'full'),0); assert.equal(K.preview(s,'ones'),5); assert.equal(K.preview(s,'chance'),5);
- s=K.record(s,'full',true); assert.equal(s.players[0].kniffelBonus,50); assert.equal(s.players[0].scores.full,0);
+ s=K.record(s,'full'); assert.equal(s.players[0].kniffelBonus,50); assert.equal(s.players[0].scores.full,0);
  s=K.roll(s,()=>0); s=K.record(s,'three'); assert.equal(s.players[0].scores.three,5); assert.equal(s.players[0].kniffelBonus,100);
  assert.throws(()=>K.create(['A'],'unknown'));
 });
@@ -40,7 +40,7 @@ test('legacy saved state and JSON reload preserve player-specific counters',()=>
  s.players[0].scores.kniffel=50; s=K.roll(s,()=>0); assert.equal(K.preview(s,'full'),25);
  s=K.record(s,'full'); assert.equal(s.players[0].kniffelCount,2); assert.equal(s.players[0].kniffelBonus,50); assert.equal(s.current,1);
  s=JSON.parse(JSON.stringify(s)); s=K.record(K.roll(s,()=>0),'kniffel'); assert.equal(s.players[1].kniffelBonus,0); assert.equal(s.current,0);
- s=K.record(K.roll(s,()=>0),'chance',true); assert.equal(s.players[0].kniffelBonus,100); assert.equal(s.players[1].kniffelCount,1);
+ s=K.record(K.roll(s,()=>0),'chance'); assert.equal(s.players[0].kniffelBonus,100); assert.equal(s.players[1].kniffelCount,1);
 });
 test('normal dice, total, winners and record protections',()=>{
  let s=K.create(['A','B']); assert.equal(s.rules,'classic'); s.players[0].kniffelCount=1; s.dice=[1,2,3,4,5]; s.rolls=1;
@@ -69,13 +69,13 @@ test('turns enforce roll limits, holds, scoring and player rotation', () => {
  s=K.roll(s,()=>0); s=K.hold(s,0); s=K.roll(s,()=>0.99); assert.deepEqual(s.dice,[1,6,6,6,6]);
  s=K.roll(s,()=>0); assert.throws(()=>K.roll(s,()=>0));
  s=K.record(s,'ones'); assert.equal(s.players[0].scores.ones,5); assert.equal(s.current,1); assert.equal(s.rolls,0);
- s=K.roll(s,()=>0); s=K.record(s,'chance',true); assert.equal(s.players[1].scores.chance,0);
+ s=K.roll(s,()=>0); s=K.record(s,'twos'); assert.equal(s.players[1].scores.twos,0);
  s=K.roll(s,()=>0); assert.throws(()=>K.record(s,'ones'));
 });
 test('bonus threshold and game completion with ties',()=>{
  assert.equal(K.total({ones:3,twos:6,threes:9,fours:12,fives:15,sixes:18}).bonus,35);
  assert.equal(K.total({ones:2,twos:6,threes:9,fours:12,fives:15,sixes:18}).bonus,0);
- let s=K.create(['A','B']); for(let i=0;i<26;i++){s=K.roll(s,()=>0); let p=s.players[s.current]; let key=K.categories.find(c=>p.scores[c.id]===undefined).id; s=K.record(s,key,true);}
+ let s=K.create(['A','B']); for(let i=0;i<26;i++){s=K.roll(s,()=>0); let p=s.players[s.current]; let key=K.categories.find(c=>p.scores[c.id]===undefined).id; s=K.record(s,key);}
  assert.equal(s.finished,true); assert.deepEqual(K.winners(s),['A','B']); assert.throws(()=>K.roll(s));
 });
 test('a reroll with all five dice held is rejected without consuming a roll',()=>{
