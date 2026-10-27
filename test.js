@@ -78,3 +78,8 @@ test('bonus threshold and game completion with ties',()=>{
  let s=K.create(['A','B']); for(let i=0;i<26;i++){s=K.roll(s,()=>0); let p=s.players[s.current]; let key=K.categories.find(c=>p.scores[c.id]===undefined).id; s=K.record(s,key,true);}
  assert.equal(s.finished,true); assert.deepEqual(K.winners(s),['A','B']); assert.throws(()=>K.roll(s));
 });
+test('a reroll with all five dice held is rejected without consuming a roll',()=>{
+ let s=K.create(['A']); s=K.roll(s,()=>0.5); for(let i=0;i<5;i++)s=K.hold(s,i);
+ assert.throws(()=>K.roll(s,()=>0),/Würfel/); assert.equal(s.rolls,1);
+ s=K.hold(s,0); s=K.roll(s,()=>0); assert.equal(s.rolls,2);
+});

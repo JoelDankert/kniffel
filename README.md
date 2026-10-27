@@ -1,6 +1,6 @@
 # Kniffel · Der Spieltisch
 
-Ein nichtkommerzielles Joke-/Spaßprojekt: Kniffel für 1–8 Personen abwechselnd am selben Gerät. Kein offizielles Produkt. Keine Werbung, Monetarisierung, Analyse oder Tracking. Keine externen Assets, Dienste oder Netzwerkanfragen.
+Ein nichtkommerzielles Joke-/Spaßprojekt: Kniffel für 1–8 Personen abwechselnd am selben Gerät. Kein offizielles Produkt. Keine Werbung, Monetarisierung, Analyse oder Tracking. Keine externen Assets oder Dienste und keine automatischen Anfragen an Dritte.
 
 ## Starten
 
@@ -8,7 +8,9 @@ Ein nichtkommerzielles Joke-/Spaßprojekt: Kniffel für 1–8 Personen abwechsel
 
 ## Spielen
 
-Spieler konfigurieren, die klassische oder die Meisterschaftsregel auswählen, bis zu dreimal würfeln und Würfel antippen, um sie zu halten. Nach mindestens einem Wurf ein freies Feld wählen, dann Punkte eintragen oder explizit streichen. Jeder Spieler füllt 13 Felder. Ab 63 Punkten im oberen Teil gibt es 35 Bonuspunkte. Full House erfordert exakt 3+2, kleine Straße vier, große Straße fünf aufeinanderfolgende Werte. Kniffel gibt 50 Punkte, Pasche die Summe aller Würfel. Jeder weitere eingetragene Kniffel gibt zusätzlich 50 Bonuspunkte: Klassisch darf der Höchstwert eines beliebigen freien Feldes gewählt werden, bei der Meisterschaftsregel zählt nur ein zum Wurf passendes Feld oder es wird gestrichen. Freiwilliges Streichen ist als praktische Spieloption auch im klassischen Modus möglich. Bei Gleichstand gewinnen alle Führenden. Neues Spiel erfordert eine Bestätigung. Der Ton ist per Schalter abschaltbar; er wird per Web Audio lokal erzeugt und durch eine Benutzeraktion aktiviert. Reduzierte Bewegung wird berücksichtigt.
+Spieler konfigurieren, die klassische oder die Meisterschaftsregel auswählen und bis zu dreimal würfeln. Der Becher lässt sich anklicken oder durch Ziehen beziehungsweise Wischen schütteln. Würfel antippen, um sie auf dem Tisch zu halten; gehaltene Würfel wandern beim nächsten Wurf nicht in den Becher. Nach mindestens einem Wurf ein freies Feld wählen, dann Punkte eintragen oder explizit streichen. Jeder Spieler füllt 13 Felder. Ab 63 Punkten im oberen Teil gibt es 35 Bonuspunkte. Full House erfordert exakt 3+2, kleine Straße vier, große Straße fünf aufeinanderfolgende Werte. Kniffel gibt 50 Punkte, Pasche die Summe aller Würfel. Jeder weitere Kniffel gibt zusätzlich 50 Bonuspunkte: Klassisch darf der Höchstwert eines beliebigen freien Feldes gewählt werden, bei der Meisterschaftsregel zählt nur ein zum Wurf passendes Feld oder es wird gestrichen. Freiwilliges Streichen ist als praktische Spieloption auch im klassischen Modus möglich. Bei Gleichstand gewinnen alle Führenden. Neues Spiel erfordert eine Bestätigung. Der Ton ist per Schalter abschaltbar; er wird per Web Audio lokal erzeugt und durch eine Benutzeraktion aktiviert. Reduzierte Bewegung wird berücksichtigt.
+
+Als Kniffel zählt in dieser App jeder abgeschlossene Zug mit fünf gleichen Würfeln, auch wenn das Kniffel-Feld zuvor gestrichen wurde. Das ist eine App-Auslegung: Die Herstelleranleitung erläutert diesen Sonderfall nicht ausdrücklich.
 
 Regelquelle: [Original-Spielanleitung von Schmidt Spiele](https://www.schmidtspiele.de/files/Produkte/4/49030%20-%20Kniffel/49030_Kniffel_DE.pdf).
 
